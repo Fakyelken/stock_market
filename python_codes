@@ -1,0 +1,141 @@
+import yfinance as yf
+import plotly.graph_objs as plot
+
+
+def print_info():
+    print("""
+    ************************  
+    
+    1. UBER     (UBER)
+    2. Amazon   (AMZN)
+    3. Nasdaq   (^IXIC)
+    4. Alibaba  (BABA)
+    5. Tesla    (TSLA)
+    6. Apple    (APPL)
+    
+    ************************""")
+
+
+def xases():
+    fig.update_xaxes(
+        rangeslider_visible=True,
+        rangeselector=dict(
+            buttons=list([
+                dict(count=15, label="15m", step="minute", stepmode="backward"),
+                dict(count=45, label="45m", step="minute", stepmode="backward"),
+                dict(count=1, label="HTD", step="hour", stepmode="todate"),
+                dict(count=3, label="3h", step="hour", stepmode="backward"),
+                dict(step="all")
+            ])
+        )
+    )
+    fig.show()
+
+
+def trace(data):
+    fig.add_trace(plot.Candlestick(x=data.index,
+                                   open=data['Open'],
+                                   high=data['High'],
+                                   low=data['Low'],
+                                   close=data['Close'], name='market data'))
+
+
+print_info()
+operator = input("Which stock market data do you want to access: ")
+
+while True:
+
+    if operator == "1":
+
+        data = yf.download(tickers='UBER', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='Uber live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "2":
+
+        data = yf.download(tickers='AMZN', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='Amazon live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "3":
+
+        data = yf.download(tickers='^IXIC', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='NASDAQ live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "4":
+
+        data = yf.download(tickers='BABA', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='Alibaba live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "5":
+
+        data = yf.download(tickers='TSLA', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='Tesla live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "6":
+
+        data = yf.download(tickers='AAPL', period='1d', interval='1m')
+        fig = plot.Figure()
+        trace(data)
+        fig.update_layout(
+            title='Apple live share price evolution',
+            yaxis_title='Stock Price (USD per Shares)')
+        xases()
+        print_info()
+        operator = input("Which stock market data do you want to access: ")
+        continue
+
+    elif operator == "0":
+            print("""
+    ********************************
+    
+    Stock market app is terminating...
+    
+    ********************************""")
+            break
+
+
+    else:
+        print("Please select an operation from 1 to 6!")
+        print("Press 0 to exit.")
+        operator = input("Which stock market data do you want to access: ")
+
+
